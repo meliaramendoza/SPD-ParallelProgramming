@@ -85,9 +85,6 @@ int main() {
     int arraySize;
     unsigned int seed = (unsigned int)time(NULL);
     srand(seed);
-
-    clock_t startSearchTime = clock();
-
     arraySize = getArraySize();
     if (arraySize == -1) {
         return 1;
@@ -101,6 +98,9 @@ int main() {
     fillArrayWithUniqueNumbers(array, arraySize);
     sortArray(array, arraySize);
     int target = getTarget();
+    
+    clock_t startSearchTime = clock();
+    
     int result = binarySearch(array, target, 0, arraySize - 1);
     printSearchResults(array, target, result, arraySize);
 

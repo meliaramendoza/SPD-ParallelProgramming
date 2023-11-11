@@ -97,7 +97,7 @@ void performSearch(int arr[], int target, int ARRAY_SIZE) {
             #pragma omp critical
             {
                 if (result == -1) {
-                    result = localResult;
+                    result = result || localResult;
                 }
             }
         }
@@ -115,8 +115,6 @@ int main() {
     srand(seed);
     double inicio, fin;
 
-    inicio = omp_get_wtime();
-
     arraySize = getArraySize();
     if (arraySize == -1) {
         return 1;
@@ -132,6 +130,9 @@ int main() {
     sortArray(arr, arraySize);
     int target = getTarget();
     omp_set_num_threads(NUM_THREADS);
+
+    inicio = omp_get_wtime();
+    
     performSearch(arr, target, arraySize);
 
     fin = omp_get_wtime();
